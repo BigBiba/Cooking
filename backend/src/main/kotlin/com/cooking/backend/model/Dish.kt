@@ -17,6 +17,7 @@ data class Dish(
     val ingredients: String,
 
     val recipe: String,
+    val category: String,
 
     val updated_at: LocalDateTime = LocalDateTime.now(),
     val created_at: LocalDateTime = LocalDateTime.now(),
