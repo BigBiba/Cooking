@@ -30,6 +30,7 @@ class UserService(
         return UserDetailsImpl(user)
     }
 
+
     fun registerUser(request: UserRegisterDto) {
         if (userRepository.findByLogin(request.login) != null) {
             throw IllegalArgumentException("Username already exists")
@@ -39,7 +40,6 @@ class UserService(
             nickname = request.nickname,
             login = request.login,
             password = passwordEncoder.encode(request.password),
-            avatarUrl = request.avatarUrl,
             created_at = LocalDateTime.now(),
             updated_at = LocalDateTime.now()
         )

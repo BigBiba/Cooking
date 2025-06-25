@@ -21,8 +21,7 @@ data class Dish(
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
     val creator: User,
 
-    @OneToMany(mappedBy = "dish", cascade = [CascadeType.ALL])
-    val photos: List<DishPhoto> = listOf(),
+    val photoUrl: String,
 
     @OneToMany(mappedBy = "dish", cascade = [CascadeType.ALL])
     val favorites: List<Favorite> = listOf()
