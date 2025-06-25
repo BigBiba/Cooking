@@ -1,6 +1,7 @@
 package com.cooking.backend.service
 
 import com.cooking.backend.Dto.UserLoginDto
+import com.cooking.backend.Dto.UserProfileDto
 import com.cooking.backend.Dto.UserRegisterDto
 import com.cooking.backend.model.User
 import com.cooking.backend.repository.UserRepository
@@ -54,6 +55,23 @@ class UserService(
 
         // Генерируем JWT токен по успешной аутентификации
         return jwtUtil.generateToken(request.login)
+    }
+
+    fun getUserProfileByUsername(username: String): UserProfileDto? {
+        val user = userRepository.findByLogin(username) ?: return null
+        return UserProfileDto(
+            nickname = user.nickname,
+            avatarURL = user.avatarUrl
+        )
+    }
+
+    fun getUserProfileById(id: Long): UserProfileDto? {
+        val user = userRepository.findById(id).orElse(null) ?: return null
+
+        return UserProfileDto(
+            nickname = user.nickname,
+            avatarURL = user.avatarUrl
+        )
     }
 
 

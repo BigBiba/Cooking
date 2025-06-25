@@ -32,6 +32,8 @@ dependencies {
 	implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.postgresql:postgresql:42.6.0")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+
 }
 
 kotlin {

@@ -3,6 +3,8 @@ package com.cooking.backend.model
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
+
+
 @Entity
 @Table(name = "dishes")
 data class Dish(
@@ -11,7 +13,9 @@ data class Dish(
 
     val title: String,
     val description: String,
+
     val ingredients: String,
+
     val recipe: String,
 
     val updated_at: LocalDateTime = LocalDateTime.now(),
