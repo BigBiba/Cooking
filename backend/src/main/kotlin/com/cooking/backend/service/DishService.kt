@@ -41,6 +41,21 @@ class DishService(
         return dishRepository.findByCreatorLogin(user.login).map{dish -> mapToDto(dish)}
     }
 
+    fun getAllDishes(): List<DishResponseDto> {
+        return dishRepository.findAll()
+            .map { dish -> mapToDto(dish) }
+    }
+
+    fun getDishesByCategory(category: String): List<DishResponseDto> {
+        return dishRepository.findByCategory(category)
+            .map { dish -> mapToDto(dish) }
+    }
+
+    fun searchDishes(query: String): List<DishResponseDto> {
+        return dishRepository.searchByTitle(query)
+            .map { dish -> mapToDto(dish) }
+    }
+
     private fun mapToDto(dish: Dish): DishResponseDto {
         return DishResponseDto(
             title = dish.title,
