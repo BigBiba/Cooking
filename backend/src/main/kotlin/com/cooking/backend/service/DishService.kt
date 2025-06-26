@@ -1,0 +1,102 @@
+package com.cooking.backend.service
+
+import com.cooking.backend.Dto.DishCreateDto
+import com.cooking.backend.Dto.DishResponseDto
+import com.cooking.backend.model.Dish
+import com.cooking.backend.repository.DishRepository
+import com.cooking.backend.repository.UserRepository
+import jakarta.transaction.Transactional
+import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.stereotype.Service
+
+@Service
+class DishService(
+    private val dishRepository: DishRepository,
+    private val userRepository: UserRepository
+) {
+
+    fun createDish(
+        title: String,
+        description: String,
+        ingredients: List<String>,
+        recipe: String,
+        category: String,
+        photo: ByteArray,
+        username: String
+    ): DishResponseDto {
+        val creator = userRepository.findByLogin(username)
+            ?: throw UsernameNotFoundException("User not found with login: $username")
+
+        val dish = Dish(
+            title = title,
+            description = description,
+            ingredients = ingredients.joinToString("\n"),
+            recipe = recipe,
+            category = category,
+            creator = creator,
+            photoUrl = photo
+        )
+
+        val savedDish = dishRepository.save(dish)
+        return mapToDto(savedDish)
+    }
+
+    @Transactional
+    fun getUserDishes(username: String ): List<DishResponseDto>
+    {
+        val user = userRepository.findByLogin(username)
+            ?: throw IllegalArgumentException("User not found")
+
+        return dishRepository.findByCreatorLogin(user.login).map{dish -> mapToDto(dish)}
+    }
+
+    fun getAllDishes(): List<DishResponseDto> {
+        return dishRepository.findAll()
+            .map { dish -> mapToDto(dish) }
+    }
+
+    fun getDishesByCategory(category: String): List<DishResponseDto> {
+        return dishRepository.findByCategory(category)
+            .map { dish -> mapToDto(dish) }
+    }
+
+    fun searchDishes(query: String): List<DishResponseDto> {
+        return dishRepository.searchByTitle(query)
+            .map { dish -> mapToDto(dish) }
+    }
+
+    fun getDishById(id: Int): DishResponseDto? {
+        val dish = dishRepository.findById(id)
+            .orElse(null) ?: return null
+
+        return mapToDto(Dish(
+            title = dish.title,
+            description = dish.description,
+            ingredients = dish.ingredients,
+            recipe = dish.recipe,
+            category = dish.category,
+            creator = dish.creator,
+            photoUrl = dish.photoUrl)
+        )
+    }
+
+    @Transactional
+    fun getDishPhoto(id: Int): ByteArray? {
+        val dish = dishRepository.findById(id).orElse(null)
+        return dish?.photoUrl?.takeIf { it.isNotEmpty() }
+    }
+
+    private fun mapToDto(dish: Dish): DishResponseDto {
+        return DishResponseDto(
+            title = dish.title,
+            description = dish.description,
+            creatorNickname = dish.creator.nickname,
+            ingredients =  dish.ingredients.split("\n").map { it.trim() }.filter { it.isNotEmpty() },
+            recipe = dish.recipe,
+            photoUrl = dish.photoUrl,
+            category = dish.category
+        )
+
+    }
+
+}
