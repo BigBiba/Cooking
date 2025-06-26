@@ -20,7 +20,7 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://136.0.133.15:8080/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -30,7 +30,7 @@ function LoginForm() {
       if (response.ok) {
         // Сохраняем токен в localStorage
         localStorage.setItem("token", data.token);
-        navigate("/");
+        navigate("/profile");
         setForm({ email: "", password: "" }); // Сброс формы
       } else {
         navigate("/login")

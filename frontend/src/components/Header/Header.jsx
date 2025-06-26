@@ -4,6 +4,7 @@ import CatalogButton from "components/CatalogButton/CatalogButton";
 
 const Header = () => {
   const token = localStorage.getItem('token');
+  console.log(token)
   return (
     <header className={styles.header}>
       <div className={styles.container}>
