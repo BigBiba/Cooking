@@ -32,7 +32,7 @@ class UserService(
     }
 
 
-    fun registerUser(request: UserRegisterDto) {
+    fun registerUser(request: UserRegisterDto): String {
         if (userRepository.findByLogin(request.login) != null) {
             throw IllegalArgumentException("Username already exists")
         }
@@ -46,6 +46,12 @@ class UserService(
         )
 
         userRepository.save(user)
+        val UserLoginDto = UserLoginDto(
+            login = request.login,
+            password = request.password,
+        )
+
+        return loginUser(UserLoginDto)
     }
 
     fun loginUser(request: UserLoginDto): String {

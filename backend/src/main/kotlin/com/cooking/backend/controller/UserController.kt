@@ -22,8 +22,8 @@ class UserController(
     @PostMapping("/register")
     fun register(@RequestBody @Valid request: UserRegisterDto): ResponseEntity<Any> {
         return try {
-            val user = userService.registerUser(request)
-            ResponseEntity.ok(user)
+            val token = userService.registerUser(request)
+            ResponseEntity.ok(token)
         } catch (e: IllegalArgumentException) {
             ResponseEntity.badRequest().body(mapOf("error" to e.message))
         }

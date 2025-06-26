@@ -20,16 +20,18 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://localhost:8080/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data = await response.json();
+      //const data = await response.json();
+      const data = await response.text();
+
 
       if (response.ok) {
         // Сохраняем токен в localStorage
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data);
         navigate("/");
         setForm({ email: "", password: "" }); // Сброс формы
       } else {
