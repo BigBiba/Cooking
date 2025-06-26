@@ -23,17 +23,18 @@ class UserController(
     fun register(@RequestBody @Valid request: UserRegisterDto): ResponseEntity<Any> {
         return try {
             val token = userService.registerUser(request)
-            ResponseEntity.ok(token)
+            ResponseEntity.ok(mapOf("token" to token))
         } catch (e: IllegalArgumentException) {
             ResponseEntity.badRequest().body(mapOf("error" to e.message))
         }
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody request: UserLoginDto): ResponseEntity<String> {
+    fun login(@RequestBody request: UserLoginDto): ResponseEntity<Map<String, String>> {
         val token = userService.loginUser(request)
-        return ResponseEntity.ok(token)
+        return ResponseEntity.ok(mapOf("token" to token))
     }
+
 
     @GetMapping("/me")
     fun getMyProfile(@AuthenticationPrincipal userDetails: UserDetails): ResponseEntity<Any> {

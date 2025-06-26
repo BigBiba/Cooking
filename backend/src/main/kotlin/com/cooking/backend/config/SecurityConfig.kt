@@ -48,7 +48,9 @@ class SecurityConfig(
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("http://localhost:3000") // адрес React-приложения
+        // Разрешить запросы с любых источников
+        // Если allowCredentials = true, лучше использовать allowedOriginPatterns
+        configuration.allowedOriginPatterns = listOf("*")
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("*")
         configuration.allowCredentials = true
@@ -57,6 +59,7 @@ class SecurityConfig(
         source.registerCorsConfiguration("/**", configuration)
         return source
     }
+
 
     @Bean
     fun authenticationProvider(): DaoAuthenticationProvider {
