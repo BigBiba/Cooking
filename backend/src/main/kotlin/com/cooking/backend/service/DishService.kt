@@ -63,7 +63,8 @@ class DishService(
             creatorNickname = dish.creator.nickname,
             ingredients =  dish.ingredients.split("\n").map { it.trim() }.filter { it.isNotEmpty() },
             recipe = dish.recipe,
-            photoUrl = dish.photoUrl
+            photoUrl = dish.photoUrl,
+            category = dish.category
         )
 
     }

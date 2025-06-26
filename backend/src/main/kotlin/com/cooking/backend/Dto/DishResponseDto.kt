@@ -5,6 +5,7 @@ data class DishResponseDto(
     val description: String,
     val ingredients: List<String>,
     val recipe: String,
+    val category: String,
     val creatorNickname: String,
     val photoUrl: String,
 )
