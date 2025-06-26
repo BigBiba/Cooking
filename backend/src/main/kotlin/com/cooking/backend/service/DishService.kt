@@ -88,6 +88,7 @@ class DishService(
 
     private fun mapToDto(dish: Dish): DishResponseDto {
         return DishResponseDto(
+            id = dish.id,
             title = dish.title,
             description = dish.description,
             creatorNickname = dish.creator.nickname,

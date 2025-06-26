@@ -1,6 +1,7 @@
 package com.cooking.backend.Dto
 
 data class DishResponseDto(
+    val id: Int,
     val title: String,
     val description: String,
     val ingredients: List<String>,
