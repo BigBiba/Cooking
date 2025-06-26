@@ -1,0 +1,25 @@
+.header {
+  margin-bottom: 10px;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 214, 52);
+    border-radius: 0 0 30px 30px;
+    // margin: 0 50px;
+
+    .catalogButton {
+        margin-left: 30px;
+    }
+
+    .logo {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .icons {
+      display: flex;
+      margin-right: 30px;
+    }
+  }
+}

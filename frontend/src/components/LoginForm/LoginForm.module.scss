@@ -1,0 +1,65 @@
+.form {
+  background: #fff;
+  padding: 40px 32px;
+  border-radius: 30px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  //   min-width: 320px;
+  //   max-width: 380px;
+  width: 380px;
+  margin: 0 auto;
+
+  h2 {
+    text-align: center;
+    color: #000;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  div {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #000;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid transparent;
+      box-sizing: border-box;
+      border-radius: 30px;
+      background: #f6f6f6;
+      font-size: 16px;
+      color: #000;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: rgb(255, 214, 52);
+        outline: none;
+        background: #fffbe7;
+      }
+    }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 14px 0;
+    background: rgb(255, 214, 52);
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s;
+
+    &:hover {
+      background: darken(rgb(255, 214, 52), 7%);
+      color: #111;
+    }
+  }
+}

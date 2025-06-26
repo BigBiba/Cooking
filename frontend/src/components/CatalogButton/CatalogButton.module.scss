@@ -1,0 +1,29 @@
+.category_dropdown {
+    .category_btn {
+        width: 100px;
+        height: 50px;
+        border-radius: 30px;
+        
+    }
+}
+
+.category_list {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 10;
+  min-width: 170px;
+}
+
+.open {
+  display: block;
+}
+
+li:hover {
+  background: #f0f0f0;
+}

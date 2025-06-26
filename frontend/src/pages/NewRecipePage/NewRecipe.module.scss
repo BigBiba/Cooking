@@ -1,0 +1,252 @@
+$newRecipe-yellow: rgb(255, 214, 52);
+$newRecipe-black: #111;
+$newRecipe-white: #fff;
+
+.newRecipe {
+  max-width: 480px;
+  margin: 40px auto;
+  background: $newRecipe-white;
+  padding: 32px 28px;
+  border-radius: 30px;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.09);
+
+  h2 {
+    margin-bottom: 22px;
+    text-align: center;
+    color: $newRecipe-black;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    display: block;
+    margin-bottom: 16px;
+    font-weight: 500;
+    color: $newRecipe-black;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    margin-top: 7px;
+    margin-bottom: 2px;
+    border: 2px solid $newRecipe-yellow;
+    border-radius: 30px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: $newRecipe-black;
+    background: $newRecipe-white;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+
+    &:focus {
+      border-color: $newRecipe-black;
+      background: #fffbec;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+    max-height: 200px;
+  }
+
+  button[type="submit"] {
+    margin-top: 24px;
+    padding: 12px 0;
+    background: $newRecipe-yellow;
+    color: $newRecipe-black;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 6px rgba(255, 214, 52, 0.15);
+    transition: background 0.22s, color 0.22s, box-shadow 0.2s;
+
+    &:hover {
+      background: $newRecipe-black;
+      color: $newRecipe-yellow;
+      box-shadow: 0 2px 12px rgba(17, 17, 17, 0.12);
+    }
+  }
+}
+
+// Цвета уже объявлены выше, используем их
+
+.ingredientsInputWrapper {
+  display: flex;
+  gap: 10px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+
+  input {
+    flex: 1 1 auto;
+    border-radius: 30px;
+    border: 2px solid $newRecipe-yellow;
+    background: $newRecipe-white;
+    color: $newRecipe-black;
+    padding: 10px 14px;
+    font-size: 1rem;
+    transition: border-color 0.2s, background 0.2s;
+
+    &:focus {
+      border-color: $newRecipe-black;
+      background: #fffbec;
+    }
+  }
+
+  button {
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: $newRecipe-yellow;
+    color: $newRecipe-black;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 1px 6px rgba(255, 214, 52, 0.09);
+    transition: background 0.2s, color 0.2s;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    &:hover:enabled {
+      background: $newRecipe-black;
+      color: $newRecipe-yellow;
+    }
+  }
+}
+
+.ingredientsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fffbec;
+    border: 1.5px solid $newRecipe-yellow;
+    color: $newRecipe-black;
+    border-radius: 30px;
+    padding: 7px 14px 7px 14px;
+    font-size: 1rem;
+    margin-bottom: 7px;
+
+    // Кнопка удаления
+    .ingredientRemoveBtn {
+      margin-left: 16px;
+      padding: 0 9px;
+      min-width: 28px;
+      min-height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: $newRecipe-yellow;
+      color: $newRecipe-black;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 6px rgba(255, 214, 52, 0.09);
+      line-height: 1;
+
+      &:hover {
+        background: $newRecipe-black;
+        color: $newRecipe-yellow;
+      }
+    }
+  }
+}
+
+.photoInput {
+  display: block;
+  width: 100%;
+
+  border: 2px solid $newRecipe-yellow;
+  border-radius: 30px;
+  padding: 10px 14px;
+  margin-top: 7px;
+  margin-bottom: 2px;
+  font-size: 1rem;
+  color: $newRecipe-black;
+  background: $newRecipe-white;
+  transition: border-color 0.2s, background 0.2s;
+
+
+  &:focus {
+    border-color: $newRecipe-black;
+    background: #fffbec;
+    outline: none;
+  }
+
+  &::file-selector-button {
+    border: none;
+    background: $newRecipe-yellow;
+    color: $newRecipe-black;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: $newRecipe-black;
+      color: $newRecipe-yellow;
+    }
+  }
+}
+
+.photoRemoveBtn {
+      margin-left: 16px;
+      padding: 0 9px;
+      min-width: 28px;
+      min-height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: $newRecipe-yellow;
+      color: $newRecipe-black;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 6px rgba(255, 214, 52, 0.09);
+      line-height: 1;
+
+      &:hover {
+        background: $newRecipe-black;
+        color: $newRecipe-yellow;
+      }
+    }
+
+
+
+.categorySelect {
+  width: 100%;
+  padding: 10px 14px;
+  margin-top: 7px;
+  margin-bottom: 2px;
+  border: 2px solid $newRecipe-yellow;
+  border-radius: 30px;
+  font-size: 1rem;
+  color: $newRecipe-black;
+  background: $newRecipe-white;
+  outline: none;
+  appearance: none;
+  transition: border-color 0.2s, background 0.2s;
+
+  &:focus {
+    border-color: $newRecipe-black;
+    background: #fffbec;
+  }
+}
