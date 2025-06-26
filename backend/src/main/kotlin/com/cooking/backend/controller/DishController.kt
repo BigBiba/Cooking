@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import com.cooking.backend.security.UserDetailsImpl
+import org.springframework.http.HttpStatus
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 
 @RestController
@@ -58,4 +59,16 @@ class DishController(
             dishService.searchDishes(q)
         )
     }
+
+    @GetMapping("/{id}")
+    fun getDishById(
+        @PathVariable id: Int
+    ): ResponseEntity<Any> {
+        val dish = dishService.getDishById(id)
+        return if (dish!=null)
+            ResponseEntity.ok(dish)
+        else
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dish not found")
+    }
+
 }

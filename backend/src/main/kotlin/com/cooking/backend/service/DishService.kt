@@ -56,6 +56,21 @@ class DishService(
             .map { dish -> mapToDto(dish) }
     }
 
+    fun getDishById(id: Int): DishResponseDto? {
+        val dish = dishRepository.findById(id)
+            .orElse(null) ?: return null
+
+        return mapToDto(Dish(
+            title = dish.title,
+            description = dish.description,
+            ingredients = dish.ingredients,
+            recipe = dish.recipe,
+            category = dish.category,
+            creator = dish.creator,
+            photoUrl = dish.photoUrl)
+        )
+    }
+
     private fun mapToDto(dish: Dish): DishResponseDto {
         return DishResponseDto(
             title = dish.title,
