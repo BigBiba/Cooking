@@ -7,5 +7,5 @@ data class DishResponseDto(
     val recipe: String,
     val category: String,
     val creatorNickname: String,
-    val photoUrl: String,
+    val photoUrl: ByteArray?,
 )

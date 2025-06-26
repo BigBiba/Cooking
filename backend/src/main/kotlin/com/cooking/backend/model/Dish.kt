@@ -15,7 +15,6 @@ data class Dish @JvmOverloads constructor(
     val description: String = "",
 
     val ingredients: String = "",
-
     val recipe: String = "",
     val category: String = "",
 
@@ -26,8 +25,11 @@ data class Dish @JvmOverloads constructor(
     @JoinColumn(name = "creatorId", referencedColumnName = "id")
     val creator: User = User(),
 
-    val photoUrl: String = "",
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    val photoUrl: ByteArray? = null,
 
     @OneToMany(mappedBy = "dish", cascade = [CascadeType.ALL])
     val favorites: List<Favorite> = listOf()
 )
+

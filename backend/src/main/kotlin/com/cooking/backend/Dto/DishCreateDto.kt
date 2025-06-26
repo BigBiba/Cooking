@@ -6,6 +6,6 @@ data class DishCreateDto (
     val ingredients: List<String>,
     val recipe: String,
     val category: String,
-    val photoUrl: String
+    val photoUrl: ByteArray?
 )
 

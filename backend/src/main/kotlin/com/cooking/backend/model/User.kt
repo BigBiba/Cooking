@@ -12,7 +12,10 @@ data class User @JvmOverloads constructor(
     val nickname: String = "",
     val login: String = "",
     val password: String = "",
-    val avatarUrl: String? = null,
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    val avatarUrl: ByteArray? = null,
 
     val updated_at: LocalDateTime = LocalDateTime.now(),
     val created_at: LocalDateTime = LocalDateTime.now(),

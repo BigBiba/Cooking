@@ -5,6 +5,7 @@ import com.cooking.backend.Dto.DishResponseDto
 import com.cooking.backend.model.Dish
 import com.cooking.backend.repository.DishRepository
 import com.cooking.backend.repository.UserRepository
+import jakarta.transaction.Transactional
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
@@ -14,25 +15,33 @@ class DishService(
     private val userRepository: UserRepository
 ) {
 
-    fun createDish(dto: DishCreateDto, username: String): DishResponseDto {
+    fun createDish(
+        title: String,
+        description: String,
+        ingredients: List<String>,
+        recipe: String,
+        category: String,
+        photo: ByteArray,
+        username: String
+    ): DishResponseDto {
         val creator = userRepository.findByLogin(username)
             ?: throw UsernameNotFoundException("User not found with login: $username")
 
-
         val dish = Dish(
-            title = dto.title,
-            description = dto.description,
-            ingredients = dto.ingredients.joinToString("\n"),
-            recipe = dto.recipe,
+            title = title,
+            description = description,
+            ingredients = ingredients.joinToString("\n"),
+            recipe = recipe,
+            category = category,
             creator = creator,
-            category = dto.category,
-            photoUrl = dto.photoUrl
+            photoUrl = photo
         )
 
         val savedDish = dishRepository.save(dish)
         return mapToDto(savedDish)
     }
 
+    @Transactional
     fun getUserDishes(username: String ): List<DishResponseDto>
     {
         val user = userRepository.findByLogin(username)
@@ -69,6 +78,12 @@ class DishService(
             creator = dish.creator,
             photoUrl = dish.photoUrl)
         )
+    }
+
+    @Transactional
+    fun getDishPhoto(id: Int): ByteArray? {
+        val dish = dishRepository.findById(id).orElse(null)
+        return dish?.photoUrl?.takeIf { it.isNotEmpty() }
     }
 
     private fun mapToDto(dish: Dish): DishResponseDto {
