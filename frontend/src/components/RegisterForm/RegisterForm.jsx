@@ -39,20 +39,30 @@ function RegisterForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/users/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch(
+        "http://136.0.133.15:8080/api/users/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem("token", data.token);
+        console.log("token", data.token);
         navigate("/");
       } else {
-        navigate("/register");
+        // Показываем ошибку из ответа сервера
+        if (data.error) {
+          alert(data.error); // или setError(data.error), если хочешь выводить в интерфейсе
+        } else {
+          alert("Ошибка регистрации");
+        }
+        // НЕ обязательно редиректить на /register, ты уже там.
       }
     } catch (err) {
-      alert("Сетевая ошибка");
+      alert(err);
     }
   };
 

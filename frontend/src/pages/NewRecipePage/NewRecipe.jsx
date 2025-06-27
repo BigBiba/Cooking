@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./NewRecipe.module.scss";
 import { useState, useRef } from "react";
 
 function NewRecipe() {
+  const navigate = useNavigate()
   const categories = [
     "Завтраки",
     "Супы",
@@ -81,7 +83,7 @@ function NewRecipe() {
 
     const token = localStorage.getItem("token");
 
-    fetch("/api/dishes", {
+    fetch("http://136.0.133.15:8080/api/dishes", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -91,6 +93,7 @@ function NewRecipe() {
       .then((res) => res.json())
       .then((data) => {
         console.log("Recipe saved:", data);
+        navigate("/profile")
       })
       .catch((err) => {
         console.error("Error:", err);

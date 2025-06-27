@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
-
+  console.log("data home", recipes)
   useEffect(() => {
-    fetch("/api/dishes/all")
+    fetch("http://136.0.133.15:8080/api/dishes/all")
       .then((res) => res.json())
       .then((data) => {
+        console.log("data home", data);
         setRecipes(data);
       })
       .catch((err) => {

@@ -5,27 +5,27 @@ import { useState, useEffect } from "react";
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-
   useEffect(() => {
-    fetch(`/api/dishes/${id}`)
-      .then(res => {
+    fetch(`http://136.0.133.15:8080/api/dishes/${id}`)
+      .then((res) => {
         if (!res.ok) throw new Error("Ошибка загрузки");
         return res.json();
       })
-      .then(data => setProduct(data))
-      .catch(err => {
+      .then((data) => setProduct(data))
+      .catch((err) => {
         console.error(err);
         setProduct(null);
       });
   }, [id]);
-
+  console.log(product);
   if (!product) return null;
-
+  const img = document.createElement("img");
+  img.src = `data:image/jpeg;base64,${product.photoUrl}`;
   return (
     <div className={styles.productCard}>
       <div className={styles.header}>
         <img
-          src="/dummy.png"
+          src={img.src}
           alt={product.title || "Заглушка"}
           width={300}
           height={300}
@@ -45,7 +45,7 @@ function Product() {
         <h3 className={styles.sectionTitle}>Ингредиенты</h3>
         <ul className={styles.ingredients}>
           {Array.isArray(product.ingredients) ? (
-            product.ingredients.map((ing, i) => <li key={i}>{ing}</li>)
+            product.ingredients.map((ing, i) => <li key={i}>{ing.replace(/^["\[\]]+|["\[\]]+$/g, '')}</li>)
           ) : (
             <li>{product.ingredients}</li>
           )}
